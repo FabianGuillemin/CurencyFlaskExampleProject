@@ -1,0 +1,54 @@
+{% extends "layouts/main.html" %}
+
+{% block content %}
+    <h3>Währungsrechner</h3>
+    <h6>Bitte Währung und umzurechndender Betrag eingeben.</h6>
+    <br />
+    <form method="get">
+        <label for="amount">Ausgangswährung</label>
+        <select name="currency_list" id="currency_list">
+                <option value="---">---</option>
+                <option value="CHF">CHF</option>
+                <option value="EUR">EUR</option>
+                <option value="JPY">JPY</option>
+                <option value="GBP">GBP</option>
+                <option value="USD">USD</option>
+        </select>
+        <input type="text" name="amount" id="amount" value="1">
+        <input type="submit" value="Umrechnen">
+    </form>
+
+    <div class="row">
+        <div class="six columns">
+            <table class="u-full-width">
+            <tr>
+                <td><strong>{% if currency != None %} {{ currency }} {% else %} &nbsp; {% endif %}</strong></td>
+                <td><strong>{% if currency != None %} {{ amount }} {% else %} &nbsp; {% endif %}</strong></td>
+            </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="u-full-width">
+            <thead>
+                <tr>
+                    <th>Währung</th>
+                    <th>Bezeichnung</th>
+                    <th>Betrag</th>
+                    <th>Währungsdatum</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in result_dict %}
+                    <tr>
+                        <td>{{ item }}</td>
+                        <td>{{ result_dict[item][0] }}</td>
+                        <td>{{ result_dict[item][1] }}</td>
+                        <td>{{ result_dict[item][2] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
